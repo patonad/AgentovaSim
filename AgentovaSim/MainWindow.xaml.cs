@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using simulation;
 
 namespace AgentovaSim
 {
@@ -23,6 +24,8 @@ namespace AgentovaSim
         public MainWindow()
         {
             InitializeComponent();
+            MySimulation  s = new MySimulation();
+            s.Simulate(1);
         }
     }
 }

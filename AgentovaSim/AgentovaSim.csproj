@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ABACore">
+      <HintPath>ABACore\ABACore.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -55,20 +58,39 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="PomocneTriedy\Cestujuci.cs" />
+    <Compile Include="PomocneTriedy\Linka.cs" />
+    <Compile Include="PomocneTriedy\Presun.cs" />
+    <Compile Include="PomocneTriedy\Zastavka.cs" />
+    <Compile Include="simulation\Mc.cs" />
+    <Compile Include="simulation\MyMessage.cs" />
+    <Compile Include="simulation\MySimulation.cs" />
+    <Compile Include="simulation\SimId.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="agents\AgentModelu.cs" />
+    <Compile Include="agents\AgentOkolia.cs" />
+    <Compile Include="agents\AgentPresunu.cs" />
+    <Compile Include="agents\AgentVozidiel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="continualAssistants\PlanovacPrichodov.cs" />
+    <Compile Include="continualAssistants\ProcesNastupenie.cs" />
+    <Compile Include="continualAssistants\ProcesPresun.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="managers\ManagerModelu.cs" />
+    <Compile Include="managers\ManagerOkolia.cs" />
+    <Compile Include="managers\ManagerPresunu.cs" />
+    <Compile Include="managers\ManagerVozidiel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -93,6 +115,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="instantAssistants\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
