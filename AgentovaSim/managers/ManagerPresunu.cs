@@ -2,6 +2,7 @@ using OSPABA;
 using simulation;
 using agents;
 using continualAssistants;
+
 namespace managers
 {
 	//meta! id="4"
@@ -51,12 +52,12 @@ namespace managers
 		{
 			switch (message.Code)
 			{
-			case Mc.Presun:
-				ProcessPresun(message);
-			break;
-
 			case Mc.Finish:
 				ProcessFinish(message);
+			break;
+
+			case Mc.Presun:
+				ProcessPresun(message);
 			break;
 
 			default:

@@ -17,17 +17,19 @@ namespace continualAssistants
 			// Setup component for the next replication
 		}
 
-		//meta! sender="AgentVozidiel", id="17", type="Start"
-		public void ProcessStart(MessageForm message)
-		{
-		}
-
+		//meta! userInfo="Removed from model"
+		
 		//meta! userInfo="Process messages defined in code", id="0"
 		public void ProcessDefault(MessageForm message)
 		{
 			switch (message.Code)
 			{
 			}
+		}
+
+		//meta! sender="AgentZasrtavok", id="38", type="Start"
+		public void ProcessStart(MessageForm message)
+		{
 		}
 
 		//meta! userInfo="Generated code: do not modify", tag="begin"

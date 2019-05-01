@@ -58,10 +58,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="agents\AgentZasrtavok.cs" />
+    <Compile Include="managers\ManagerZasrtavok.cs" />
     <Compile Include="PomocneTriedy\Cestujuci.cs" />
     <Compile Include="PomocneTriedy\Linka.cs" />
     <Compile Include="PomocneTriedy\Presun.cs" />
     <Compile Include="PomocneTriedy\Zastavka.cs" />
+    <Compile Include="PomocneTriedy\GeneratorCestujucych.cs" />
     <Compile Include="simulation\Mc.cs" />
     <Compile Include="simulation\MyMessage.cs" />
     <Compile Include="simulation\MySimulation.cs" />

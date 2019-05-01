@@ -2,11 +2,13 @@ using OSPABA;
 using simulation;
 using agents;
 using continualAssistants;
+
 namespace managers
 {
 	//meta! id="1"
 	public class ManagerModelu : Manager
 	{
+	    public int Cislo { get; set; } = 0;
 		public ManagerModelu(int id, Simulation mySim, Agent myAgent) :
 			base(id, mySim, myAgent)
 		{
@@ -25,11 +27,13 @@ namespace managers
 		}
 
 		//meta! sender="AgentOkolia", id="8", type="Notice"
-		public void ProcessNotice(MessageForm message)
+		public void ProcessNovyCestujuci(MessageForm message)
 		{
+		    var ms = (MyMessage) message;
+           Cislo++;
 		}
 
-		//meta! sender="AgentVozidiel", id="9", type="Response"
+		//meta! userInfo="Removed from model"
 		public void ProcessNastupenie(MessageForm message)
 		{
 		}
@@ -51,12 +55,8 @@ namespace managers
 		{
 			switch (message.Code)
 			{
-			case Mc.Notice:
-				ProcessNotice(message);
-			break;
-
-			case Mc.Nastupenie:
-				ProcessNastupenie(message);
+			case Mc.NovyCestujuci:
+				ProcessNovyCestujuci(message);
 			break;
 
 			default:

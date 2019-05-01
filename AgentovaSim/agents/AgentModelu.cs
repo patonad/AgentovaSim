@@ -24,8 +24,7 @@ namespace agents
 		private void Init()
 		{
 			new ManagerModelu(SimId.ManagerModelu, MySim, this);
-			AddOwnMessage(Mc.Notice);
-			AddOwnMessage(Mc.Nastupenie);
+			AddOwnMessage(Mc.NovyCestujuci);
 		}
 		//meta! tag="end"
 	}

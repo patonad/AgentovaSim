@@ -1,43 +1,47 @@
-using agents;
 using OSPABA;
-using OSPStat;
-using simulation;
+using agents;
 using managers;
-using continualAssistants;
-using OSPDataStruct;
+
 namespace simulation
 {
 	public class MySimulation : Simulation
 	{
+	    public int Pocet { get; set; }
 		public MySimulation()
 		{
 			Init();
 		}
 
-		protected override void PrepareSimulation()
+	    protected override void PrepareSimulation()
 		{
 			base.PrepareSimulation();
 			// Create global statistcis
 		}
 
-		protected override void PrepareReplication()
+	    protected override void PrepareReplication()
 		{
 			base.PrepareReplication();
-			// Reset entities, queues, local statistics, etc...
+            // Reset entities, queues, local statistics, etc...
+		    ((ManagerModelu) AgentModelu.MyManager).Cislo = 0;
+
 		}
-	   
 
 	    protected override void ReplicationFinished()
 		{
 			// Collect local statistics into global, update UI, etc...
 			base.ReplicationFinished();
-		}
+		    Pocet += ((ManagerModelu)AgentModelu.MyManager).Cislo;
 
-		protected override void SimulationFinished()
+
+        }
+
+	    protected override void SimulationFinished()
 		{
 			// Dysplay simulation results
 			base.SimulationFinished();
-		}
+		    
+
+        }
 
 		//meta! userInfo="Generated code: do not modify", tag="begin"
 		private void Init()
@@ -46,6 +50,7 @@ namespace simulation
 			AgentOkolia = new AgentOkolia(SimId.AgentOkolia, this, AgentModelu);
 			AgentVozidiel = new AgentVozidiel(SimId.AgentVozidiel, this, AgentModelu);
 			AgentPresunu = new AgentPresunu(SimId.AgentPresunu, this, AgentVozidiel);
+			AgentZasrtavok = new AgentZasrtavok(SimId.AgentZasrtavok, this, AgentVozidiel);
 		}
 		public AgentModelu AgentModelu
 		{ get; set; }
@@ -55,7 +60,8 @@ namespace simulation
 		{ get; set; }
 		public AgentPresunu AgentPresunu
 		{ get; set; }
-        //meta! tag="end"
-	   
-    }
+		public AgentZasrtavok AgentZasrtavok
+		{ get; set; }
+		//meta! tag="end"
+	}
 }

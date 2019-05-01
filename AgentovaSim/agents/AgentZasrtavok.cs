@@ -2,13 +2,12 @@ using OSPABA;
 using simulation;
 using managers;
 using continualAssistants;
-
 namespace agents
 {
-	//meta! id="3"
-	public class AgentVozidiel : Agent
+	//meta! id="28"
+	public class AgentZasrtavok : Agent
 	{
-		public AgentVozidiel(int id, Simulation mySim, Agent parent) :
+		public AgentZasrtavok(int id, Simulation mySim, Agent parent) :
 			base(id, mySim, parent)
 		{
 			Init();
@@ -23,9 +22,9 @@ namespace agents
 		//meta! userInfo="Generated code: do not modify", tag="begin"
 		private void Init()
 		{
-			new ManagerVozidiel(SimId.ManagerVozidiel, MySim, this);
-			AddOwnMessage(Mc.Presun);
-			AddOwnMessage(Mc.PrichodCestuVozidlo);
+			new ManagerZasrtavok(SimId.ManagerZasrtavok, MySim, this);
+			new ProcesNastupenie(SimId.ProcesNastupenie, MySim, this);
+			AddOwnMessage(Mc.PrichodCestuZastavka);
 			AddOwnMessage(Mc.Nastupenie);
 		}
 		//meta! tag="end"

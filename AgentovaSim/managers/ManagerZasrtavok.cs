@@ -2,13 +2,12 @@ using OSPABA;
 using simulation;
 using agents;
 using continualAssistants;
-
 namespace managers
 {
-	//meta! id="3"
-	public class ManagerVozidiel : Manager
+	//meta! id="28"
+	public class ManagerZasrtavok : Manager
 	{
-		public ManagerVozidiel(int id, Simulation mySim, Agent myAgent) :
+		public ManagerZasrtavok(int id, Simulation mySim, Agent myAgent) :
 			base(id, mySim, myAgent)
 		{
 			Init();
@@ -25,17 +24,17 @@ namespace managers
 			}
 		}
 
-		//meta! sender="AgentPresunu", id="10", type="Response"
-		public void ProcessPresun(MessageForm message)
+		//meta! sender="AgentVozidiel", id="42", type="Notice"
+		public void ProcessPrichodCestuZastavka(MessageForm message)
 		{
 		}
 
-		//meta! userInfo="Removed from model"
+		//meta! sender="ProcesNastupenie", id="38", type="Finish"
 		public void ProcessFinish(MessageForm message)
 		{
 		}
 
-		//meta! userInfo="Removed from model"
+		//meta! sender="AgentVozidiel", id="30", type="Request"
 		public void ProcessNastupenie(MessageForm message)
 		{
 		}
@@ -48,14 +47,6 @@ namespace managers
 			}
 		}
 
-		//meta! sender="AgentModelu", id="40", type="Notice"
-		public void ProcessPrichodCestuVozidlo(MessageForm message)
-		{
-		}
-
-		//meta! sender="AgentZasrtavok", id="30", type="Response"
-		
-
 		//meta! userInfo="Generated code: do not modify", tag="begin"
 		public void Init()
 		{
@@ -65,16 +56,16 @@ namespace managers
 		{
 			switch (message.Code)
 			{
-			case Mc.PrichodCestuVozidlo:
-				ProcessPrichodCestuVozidlo(message);
+			case Mc.Finish:
+				ProcessFinish(message);
+			break;
+
+			case Mc.PrichodCestuZastavka:
+				ProcessPrichodCestuZastavka(message);
 			break;
 
 			case Mc.Nastupenie:
 				ProcessNastupenie(message);
-			break;
-
-			case Mc.Presun:
-				ProcessPresun(message);
 			break;
 
 			default:
@@ -83,11 +74,11 @@ namespace managers
 			}
 		}
 		//meta! tag="end"
-		public new AgentVozidiel MyAgent
+		public new AgentZasrtavok MyAgent
 		{
 			get
 			{
-				return (AgentVozidiel)base.MyAgent;
+				return (AgentZasrtavok)base.MyAgent;
 			}
 		}
 	}

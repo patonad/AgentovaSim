@@ -1,12 +1,14 @@
 using AgentovaSim.PomocneTriedy;
+using AgentovaSim.simulation;
 using OSPABA;
 namespace simulation
 {
 	public class MyMessage : MessageForm
 	{
-	    public Zastavka Zastavka { get; set; } = null;
-	    public Cestujuci Cestujuci { get; set; } = null;
-		public MyMessage(Simulation sim) :
+	    public GeneratorCestujucych Generator { get; set; }
+	    public Cestujuci Cestujuci { get; set;}
+
+	    public MyMessage(Simulation sim) :
 			base(sim)
 		{
 		}
@@ -26,7 +28,7 @@ namespace simulation
 		{
 			base.Copy(message);
 			MyMessage original = (MyMessage)message;
-		    Zastavka = original.Zastavka;
+		    Generator = original.Generator;
 		    Cestujuci = original.Cestujuci;
 		}
 	}

@@ -25,7 +25,8 @@ namespace AgentovaSim
         {
             InitializeComponent();
             MySimulation  s = new MySimulation();
-            s.Simulate(1);
+            s.Simulate(1000);
+            var a = s.Pocet/1000.0;
         }
     }
 }

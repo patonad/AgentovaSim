@@ -8,5 +8,6 @@ namespace AgentovaSim.PomocneTriedy
 {
     public class Cestujuci
     {
+        public string Zastavka { get; set; }
     }
 }
