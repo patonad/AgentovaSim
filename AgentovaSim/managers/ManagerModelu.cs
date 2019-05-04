@@ -2,11 +2,13 @@ using OSPABA;
 using simulation;
 using agents;
 using continualAssistants;
+using PropertyChanged;
 
 namespace managers
 {
-	//meta! id="1"
-	public class ManagerModelu : Manager
+    //meta! id="1"
+    [AddINotifyPropertyChangedInterface]
+    public class ManagerModelu : Manager
 	{
 	    public int Cislo { get; set; } = 0;
 		public ManagerModelu(int id, Simulation mySim, Agent myAgent) :
@@ -29,8 +31,12 @@ namespace managers
 		//meta! sender="AgentOkolia", id="8", type="Notice"
 		public void ProcessNovyCestujuci(MessageForm message)
 		{
-		    var ms = (MyMessage) message;
-           Cislo++;
+		    Cislo++;
+		    var ms = (MyMessage) message.CreateCopy();
+		    ms.Addressee = MySim.FindAgent(SimId.AgentVozidiel);
+		    ms.Code = Mc.PrichodCestuVozidlo;
+            Notice(ms);
+
 		}
 
 		//meta! userInfo="Removed from model"

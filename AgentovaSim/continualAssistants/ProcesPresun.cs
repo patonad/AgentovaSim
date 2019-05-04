@@ -20,15 +20,30 @@ namespace continualAssistants
 		//meta! sender="AgentPresunu", id="20", type="Start"
 		public void ProcessStart(MessageForm message)
 		{
+		    var ms = (MyMessage) message.CreateCopy();
+		    ms.Code = Mc.KoniecPresunu;
+            var vozidlo = ms.Vozidlo;
+		    var linka = vozidlo.Linka;
+		    var prestup = linka.Presuny[vozidlo.AktualnyPresun];
+		    vozidlo.Cesta = prestup.ZastavkaStart.Nazov + " - " +
+		                    prestup.ZastavkaKoniec.Nazov;
+		    vozidlo.Strat = MySim.CurrentTime;
+		    vozidlo.Koniec = MySim.CurrentTime + prestup.CasPresunu;
+            Hold(prestup.CasPresunu,ms);
+		    vozidlo.AktualnyPresun++;
+		    vozidlo.AktualnyPresun = vozidlo.AktualnyPresun % linka.Presuny.Count;
+
 		}
 
 		//meta! userInfo="Process messages defined in code", id="0"
 		public void ProcessDefault(MessageForm message)
 		{
-			switch (message.Code)
-			{
-			}
-		}
+		    var ms = (MyMessage)message.CreateCopy();
+           
+		    ms.Code = Mc.KoniecPresunu;
+		    ms.Addressee = MyAgent;
+		    Notice(ms);
+        }
 
 		//meta! userInfo="Generated code: do not modify", tag="begin"
 		override public void ProcessMessage(MessageForm message)

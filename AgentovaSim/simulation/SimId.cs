@@ -15,8 +15,10 @@ namespace simulation
 		public const int ManagerPresunu = 104;
 		public const int ManagerZasrtavok = 105;
 		public const int ProcesPresun = 1003;
-		public const int ProcesNastupenie = 1004;
-		public const int PlanovacPrichodov = 1001;
+	    public const int PlanovacStat = 1010;
+        public const int ProcesNastupenie = 1004;
+	    public const int ProcesVystupenie = 1005;
+        public const int PlanovacPrichodov = 1001;
 		//meta! tag="end"
 	}
 }

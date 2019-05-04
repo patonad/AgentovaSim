@@ -16,7 +16,7 @@ namespace continualAssistants
         public PlanovacPrichodov(int id, Simulation mySim, CommonAgent myAgent) :
             base(id, mySim, myAgent)
         {
-            
+
         }
 
         override public void PrepareReplication()
@@ -30,12 +30,12 @@ namespace continualAssistants
             {
                 _generatory.Add(new GeneratorCestujucych((65.0 / listPrichod[i]) * 60, listNazov[i], casy[i], listPrichod[i]) { MaxCasGen = casy[i] + 65 });
             }
-            //_generatory.Add(new GeneratorCestujucych((65.0 / 260) * 60, "K1", 29.2, 260){MaxCasGen = 35.2});
-            //_generatory.Add(new GeneratorCestujucych((65.0 / 210) * 60, "K2", 21.7, 210){MaxCasGen = 31.2});
-            //_generatory.Add(new GeneratorCestujucych((65.0 / 220) * 60, "K3", 14.8, 220){MaxCasGen = 15.7});
-            _generatory.Add(new GeneratorCestujucych((65.0 / 260) * 60, "K1", 29.2, 260) { MaxCasGen = 29.2 + 65 });
-            _generatory.Add(new GeneratorCestujucych((65.0 / 210) * 60, "K2", 21.7, 210) { MaxCasGen = 21.7 + 65 });
-            _generatory.Add(new GeneratorCestujucych((65.0 / 220) * 60, "K3", 14.8, 220) { MaxCasGen = 14.8 + 65 });
+            //_generatory.Add(new GeneratorCestujucych((65.0 / 260) * 60, "K1", 29.2, 260) { MaxCasGen = 29.2 + 65 });
+            //_generatory.Add(new GeneratorCestujucych((65.0 / 210) * 60, "K2", 21.7, 210) { MaxCasGen = 21.7 + 65 });
+            //_generatory.Add(new GeneratorCestujucych((65.0 / 220) * 60, "K3", 14.8, 220) { MaxCasGen = 14.8 + 65 });
+            _generatory.Add(new GeneratorCestujucych((65.0 / 260) * 60, "K1", 29.2, 260) { MaxCasGen = 35.2 + 65 });
+            _generatory.Add(new GeneratorCestujucych((65.0 / 210) * 60, "K2", 21.7, 210) { MaxCasGen = 31.1 + 65 });
+            _generatory.Add(new GeneratorCestujucych((65.0 / 220) * 60, "K3", 14.8, 220) { MaxCasGen = 15.7 + 65 });
         }
 
         //meta! sender="AgentOkolia", id="14", type="Start"
@@ -88,32 +88,26 @@ namespace continualAssistants
         private void ProcesGen(MessageForm message)
         {
             var ms = (MyMessage)message.CreateCopy();
-         
+            ms.Code = Mc.GenerujCestujuceho;
+            ms.Addressee = MyAgent;
+            ms.Generator.Kolko--;
+            ms.Cestujuci = new Cestujuci() { Zastavka = ms.Generator.Nazov };
+            Notice(ms);
             var cas = ms.Generator.ExponentialRng.Sample();
-            //if ((ms.Generator.MaxCasGen) * 60 >= MySim.CurrentTime + cas && ms.Generator.Kolko > 0)
-            //    var a = ms.Generator.MaxCasGen * 60;
-            //var b = (ms.Generator.Oneskorenie + 65) * 60;
-            //if (a != b)
-            //{
-            //    ;
-            //}
 
-            if ((ms.Generator.MaxCasGen) *60 >= MySim.CurrentTime + cas && ms.Generator.Kolko > 0)
-                {
-                ms.Generator.Kolko--;
+            // if ((ms.Generator.MaxCasGen) *60 >= MySim.CurrentTime + cas)
+
+            if ((ms.Generator.MaxCasGen) * 60 >= MySim.CurrentTime + cas && ms.Generator.Kolko > 0)
+            {
+                ms = (MyMessage)message.CreateCopy();
                 ms.Code = Mc.GenerujCestujuceho;
-                Hold(cas , ms);
+                Hold(cas, ms);
             }
             else
             {
                 ;
             }
-           
-            ms = (MyMessage)message.CreateCopy();
-            ms.Code = Mc.GenerujCestujuceho;
-            ms.Addressee = MyAgent;
-            ms.Cestujuci = new Cestujuci() { Zastavka = ms.Generator.Nazov };
-            Notice(ms);
+
 
 
 

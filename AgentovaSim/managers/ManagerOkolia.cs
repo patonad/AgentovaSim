@@ -3,10 +3,12 @@ using simulation;
 using agents;
 using AgentovaSim.PomocneTriedy;
 using continualAssistants;
+using PropertyChanged;
 
 namespace managers
 {
     //meta! id="2"
+    [AddINotifyPropertyChangedInterface]
     public class ManagerOkolia : Manager
     {
         public ManagerOkolia(int id, Simulation mySim, Agent myAgent) :
@@ -67,8 +69,8 @@ namespace managers
             ms.Addressee = MySim.FindAgent(SimId.AgentModelu);
             ms.Code = Mc.NovyCestujuci;
             Notice(ms);
-            ms = (MyMessage)message.CreateCopy();
-            ms.Addressee =MyAgent.FindAssistant(SimId.PlanovacPrichodov);
+            //ms = (MyMessage)message.CreateCopy();
+            //ms.Addressee =MyAgent.FindAssistant(SimId.PlanovacPrichodov);
            
         }
 

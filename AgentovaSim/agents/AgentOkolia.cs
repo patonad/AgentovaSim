@@ -2,10 +2,13 @@ using OSPABA;
 using simulation;
 using managers;
 using continualAssistants;
+using PropertyChanged;
+
 namespace agents
 {
-	//meta! id="2"
-	public class AgentOkolia : Agent
+    [AddINotifyPropertyChangedInterface]
+    //meta! id="2"
+    public class AgentOkolia : Agent
 	{
 		public AgentOkolia(int id, Simulation mySim, Agent parent) :
 			base(id, mySim, parent)

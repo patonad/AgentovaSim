@@ -1,16 +1,19 @@
-using OSPABA;
-using simulation;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using agents;
-using AgentovaSim.PomocneTriedy;
+using OSPABA;
 using OSPRNG;
+using simulation;
 
-namespace continualAssistants
+namespace AgentovaSim.continualAssistants
 {
-    //meta! id="16"
-    public class ProcesNastupenie : Process
+    class ProcesVystup : Process
     {
         public TriangularRNG TriangularRng { get; set; }
-        public ProcesNastupenie(int id, Simulation mySim, CommonAgent myAgent) :
+        public ProcesVystup(int id, Simulation mySim, CommonAgent myAgent) :
             base(id, mySim, myAgent)
         {
         }
@@ -35,34 +38,34 @@ namespace continualAssistants
         //meta! sender="AgentZasrtavok", id="38", type="Start"
         public void ProcessStart(MessageForm message)
         {
-            var ms = (MyMessage) message;
+            var ms = (MyMessage)message;
             var vozidlo = ms.Vozidlo;
-            var zastavka = vozidlo.Linka.Presuny[ms.Vozidlo.AktualnyPresun].ZastavkaStart;
+           // var zastavka = vozidlo.Linka.Presuny[ms.Vozidlo.AktualnyPresun].ZastavkaStart;
             int a = 0;
-            if (ms.Vozidlo.PocetDvery <= zastavka.PocetCestujucich)
+            if (ms.Vozidlo.PocetDvery <= vozidlo.Obsadene)
             {
                 a = ms.Vozidlo.PocetDvery;
             }
             else
             {
-                a = zastavka.PocetCestujucich;
+                a = vozidlo.Obsadene;
             }
             for (int i = 0; i < a; i++)
             {
-                if (!ms.Vozidlo.JePlny())
+                if (!ms.Vozidlo.JePrazdny())
                 {
-                    ms = (MyMessage) message.CreateCopy();
-                    ms.Code = Mc.NastupojeNiekto;
+                    ms = (MyMessage)message.CreateCopy();
+                    ms.Code = Mc.VystupujeNiekto;
                     vozidlo.PocetObsadenychDvery++;
-                    vozidlo.Nastup(zastavka.Dequeue());
-                    Hold(TriangularRng.Sample(),ms);
+                    vozidlo.Vystup();
+                    Hold(TriangularRng.Sample(), ms);
                 }
             }
 
             if (vozidlo.PocetObsadenychDvery == 0)
             {
                 ms.Addressee = MyAgent;
-                ms.Code = Mc.KoniecNastupu;
+                ms.Code = Mc.KoniecVystupu;
                 Notice(ms);
             }
 
@@ -76,8 +79,8 @@ namespace continualAssistants
                 case Mc.Start:
                     ProcessStart(message);
                     break;
-                case Mc.NastupojeNiekto:
-                    ProcessNastupijeNiekto(message);
+                case Mc.VystupujeNiekto:
+                    ProcessVystupujeNiekto(message);
                     break;
                 default:
                     ProcessDefault(message);
@@ -85,18 +88,18 @@ namespace continualAssistants
             }
         }
 
-        private void ProcessNastupijeNiekto(MessageForm message)
+        private void ProcessVystupujeNiekto(MessageForm message)
         {
-            MyMessage ms = (MyMessage) message;
-          
+            MyMessage ms = (MyMessage)message;
+
             var vozidlo = ms.Vozidlo;
-            var zastavka = vozidlo.Linka.Presuny[ms.Vozidlo.AktualnyPresun].ZastavkaStart;
-            if (!vozidlo.JePlny())
+           // var zastavka = vozidlo.Linka.Presuny[ms.Vozidlo.AktualnyPresun].ZastavkaStart;
+            if (!vozidlo.JePrazdny())
             {
-                if (zastavka.PocetCestujucich != 0)
+                if (vozidlo.Obsadene != 0)
                 {
-                    ms.Code = Mc.NastupojeNiekto;
-                    vozidlo.Nastup(zastavka.Dequeue());
+                    ms.Code = Mc.VystupujeNiekto;
+                    vozidlo.Vystup();
                     Hold(TriangularRng.Sample(), ms);
                     return;
                 }
@@ -110,7 +113,7 @@ namespace continualAssistants
             if (vozidlo.PocetObsadenychDvery == 0)
             {
                 ms.Addressee = MyAgent;
-                ms.Code = Mc.KoniecNastupu;
+                ms.Code = Mc.KoniecVystupu;
                 Notice(ms);
             }
         }

@@ -7,6 +7,8 @@ namespace simulation
 	{
 	    public GeneratorCestujucych Generator { get; set; }
 	    public Cestujuci Cestujuci { get; set;}
+	    public Vozidlo Vozidlo { get; set; }
+	  //  public Linka Linka { get; set; }    
 
 	    public MyMessage(Simulation sim) :
 			base(sim)
@@ -30,6 +32,8 @@ namespace simulation
 			MyMessage original = (MyMessage)message;
 		    Generator = original.Generator;
 		    Cestujuci = original.Cestujuci;
+		    Vozidlo = original.Vozidlo;
+		   // Linka = original.Linka;
 		}
 	}
 }
