@@ -8,6 +8,8 @@ namespace simulation
 	    public GeneratorCestujucych Generator { get; set; }
 	    public Cestujuci Cestujuci { get; set;}
 	    public Vozidlo Vozidlo { get; set; }
+
+	    public double Oneskorenie { get; set; }
 	  //  public Linka Linka { get; set; }    
 
 	    public MyMessage(Simulation sim) :
@@ -33,7 +35,8 @@ namespace simulation
 		    Generator = original.Generator;
 		    Cestujuci = original.Cestujuci;
 		    Vozidlo = original.Vozidlo;
-		   // Linka = original.Linka;
+		    Oneskorenie = original.Oneskorenie;
+		    // Linka = original.Linka;
 		}
 	}
 }

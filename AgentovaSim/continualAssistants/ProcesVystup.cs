@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using agents;
+using AgentovaSim.PomocneTriedy;
 using OSPABA;
 using OSPRNG;
 using simulation;
@@ -22,9 +23,20 @@ namespace AgentovaSim.continualAssistants
         {
             base.PrepareReplication();
             // Setup component for the next replication
-            TriangularRng = new TriangularRNG(0.6, 1.2, 4.2);
-        }
+           TriangularRng = new TriangularRNG(0.6, 1.2, 4.2, ((MySimulation)MySim).Random);
+           // TriangularRng = new TriangularRNG(0.6, 1.2, 4.2, new Random(1));
+         
 
+        }
+        private void Prerataj(Vozidlo vozidlo, Cestujuci ces)
+        {
+            vozidlo.Linka.PoZaciatku++;
+            vozidlo.Linka.PoZaciatkuPomer = (vozidlo.Linka.PoZaciatku / (double)vozidlo.Linka.Nastupeny) * 100;
+
+            ((MySimulation)MySim).PoZaciatku++;
+            ((MySimulation)MySim).PoZaciatkuPomer = (((MySimulation)MySim).PoZaciatku / (double)((MySimulation)MySim).Nastupeny) * 100;
+
+        }
         //meta! userInfo="Removed from model"
 
         //meta! userInfo="Process messages defined in code", id="0"
@@ -41,32 +53,61 @@ namespace AgentovaSim.continualAssistants
             var ms = (MyMessage)message;
             var vozidlo = ms.Vozidlo;
            // var zastavka = vozidlo.Linka.Presuny[ms.Vozidlo.AktualnyPresun].ZastavkaStart;
-            int a = 0;
-            if (ms.Vozidlo.PocetDvery <= vozidlo.Obsadene)
+            if (vozidlo.Typ == "A")
             {
-                a = ms.Vozidlo.PocetDvery;
+                int a = 0;
+                if (ms.Vozidlo.PocetDvery <= vozidlo.Obsadene)
+                {
+                    a = ms.Vozidlo.PocetDvery;
+                }
+                else
+                {
+                    a = vozidlo.Obsadene;
+                }
+                for (int i = 0; i < a; i++)
+                {
+                    if (!ms.Vozidlo.JePrazdny())
+                    {
+                        ms = (MyMessage)message.CreateCopy();
+                        ms.Code = Mc.VystupujeNiekto;
+                        vozidlo.PocetObsadenychDvery++;
+                        var ces = vozidlo.Vystup();
+                        if (MySim.CurrentTime > 6786)
+                        {
+                           Prerataj(vozidlo,ces);
+                        }
+                        Hold(TriangularRng.Sample(), ms);
+                        //Hold(3.1, ms);
+                    }
+                }
+
+                if (vozidlo.PocetObsadenychDvery == 0)
+                {
+                    ms.Addressee = MyAgent;
+                    ms.Code = Mc.KoniecVystupu;
+                    Notice(ms);
+                }
             }
             else
             {
-                a = vozidlo.Obsadene;
-            }
-            for (int i = 0; i < a; i++)
-            {
-                if (!ms.Vozidlo.JePrazdny())
+                if (!vozidlo.JePrazdny())
                 {
                     ms = (MyMessage)message.CreateCopy();
                     ms.Code = Mc.VystupujeNiekto;
-                    vozidlo.PocetObsadenychDvery++;
-                    vozidlo.Vystup();
-                    Hold(TriangularRng.Sample(), ms);
+                    var ces = vozidlo.Vystup();
+                    if (MySim.CurrentTime > 6786)
+                    {
+                        Prerataj(vozidlo, ces);
+                    }
+                    Hold(4, ms);
+                    //Hold(3.1, ms);
                 }
-            }
-
-            if (vozidlo.PocetObsadenychDvery == 0)
-            {
-                ms.Addressee = MyAgent;
-                ms.Code = Mc.KoniecVystupu;
-                Notice(ms);
+                else
+                {
+                    ms.Addressee = MyAgent;
+                    ms.Code = Mc.KoniecVystupu;
+                    Notice(ms);
+                }
             }
 
         }
@@ -93,28 +134,57 @@ namespace AgentovaSim.continualAssistants
             MyMessage ms = (MyMessage)message;
 
             var vozidlo = ms.Vozidlo;
-           // var zastavka = vozidlo.Linka.Presuny[ms.Vozidlo.AktualnyPresun].ZastavkaStart;
-            if (!vozidlo.JePrazdny())
+            if (vozidlo.Typ =="A")
             {
-                if (vozidlo.Obsadene != 0)
+                // var zastavka = vozidlo.Linka.Presuny[ms.Vozidlo.AktualnyPresun].ZastavkaStart;
+                if (!vozidlo.JePrazdny())
                 {
-                    ms.Code = Mc.VystupujeNiekto;
-                    vozidlo.Vystup();
-                    Hold(TriangularRng.Sample(), ms);
-                    return;
+                    if (vozidlo.Obsadene != 0)
+                    {
+                        ms.Code = Mc.VystupujeNiekto;
+                        var ces = vozidlo.Vystup();
+                        if (MySim.CurrentTime > 6786)
+                        {
+                            Prerataj(vozidlo, ces);
+                        }
+                        //Hold(3.1, ms);
+                        Hold(TriangularRng.Sample(), ms);
+                        return;
+                    }
+                    vozidlo.PocetObsadenychDvery--;
                 }
-                vozidlo.PocetObsadenychDvery--;
+                else
+                {
+                    vozidlo.PocetObsadenychDvery--;
+                }
+
+                if (vozidlo.PocetObsadenychDvery == 0)
+                {
+                    ms.Addressee = MyAgent;
+                    ms.Code = Mc.KoniecVystupu;
+                    Notice(ms);
+                }
             }
             else
             {
-                vozidlo.PocetObsadenychDvery--;
-            }
-
-            if (vozidlo.PocetObsadenychDvery == 0)
-            {
-                ms.Addressee = MyAgent;
-                ms.Code = Mc.KoniecVystupu;
-                Notice(ms);
+                if (!vozidlo.JePrazdny())
+                {
+                    ms = (MyMessage)message.CreateCopy();
+                    ms.Code = Mc.VystupujeNiekto;
+                    var ces = vozidlo.Vystup();
+                    if (MySim.CurrentTime > 6786)
+                    {
+                        Prerataj(vozidlo, ces);
+                    }
+                    //Hold(3.1, ms);
+                    Hold(4, ms);
+                }
+                else
+                {
+                    ms.Addressee = MyAgent;
+                    ms.Code = Mc.KoniecVystupu;
+                    Notice(ms);
+                }
             }
         }
 

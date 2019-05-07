@@ -16,6 +16,9 @@ namespace simulation
 	    public const int KoniecNastupu = 5;
 	    public const int VystupujeNiekto = 6;
 	    public const int KoniecVystupu = 7;
+	    public const int Cakanie = 8;
+	    public const int KOniecCakanie = 9;
+	    public const int PrichodVozidla = 10;
         //meta! tag="end"
 
         // 1..1000 range reserved for user

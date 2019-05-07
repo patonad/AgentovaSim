@@ -32,6 +32,7 @@ namespace managers
 		public void ProcessNovyCestujuci(MessageForm message)
 		{
 		    Cislo++;
+		    ((MySimulation) MySim).PocetVRepl++;
 		    var ms = (MyMessage) message.CreateCopy();
 		    ms.Addressee = MySim.FindAgent(SimId.AgentVozidiel);
 		    ms.Code = Mc.PrichodCestuVozidlo;

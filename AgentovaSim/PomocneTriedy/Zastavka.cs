@@ -15,14 +15,20 @@ namespace AgentovaSim.PomocneTriedy
         public string Nazov { get; set; }
         public int PocetCestujucich { get; set; }
         private SimQueue<Cestujuci> _cestujuciQueue{ get; set; } = new SimQueue<Cestujuci>();
+        public Vozidlo CakajuceVozidlo { get; set; }
         public Zastavka(string nazov)
         {
             Nazov = nazov;
             PocetCestujucich = 0;
-            //for (int i = 0; i < 5; i++)
+            //for (int i = 0; i < 1; i++)
             //{
             //    Enqueue(new Cestujuci());
             //}
+        }
+
+        public Cestujuci Peek()
+        {
+            return _cestujuciQueue.Peek();
         }
 
         public void Enqueue(Cestujuci ces)

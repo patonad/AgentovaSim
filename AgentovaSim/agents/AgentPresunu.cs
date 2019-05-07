@@ -18,60 +18,88 @@ namespace agents
             base(id, mySim, parent)
         {
             Init();
-            GenerujVozidla();
         }
 
         private void GenerujVozidla()
         {
+            
             var sim = (MySimulation)MySim;
             var parent = (AgentVozidiel)Parent;
+            parent.LinkaA.ListVozidiel.Clear();
+            parent.LinkaB.ListVozidiel.Clear();
+            parent.LinkaC.ListVozidiel.Clear();
             for (int i = 0; i < sim._linkaATyp1; i++)
             {
                // var voz = new Vozidlo(4, 186, parent.LinkaA);
-                var voz = new Vozidlo(4, 186, parent.LinkaA) { AktualnyPresun = 12};
+                var voz = new Vozidlo(4, 186, parent.LinkaA,"A") { AktualnyPresun = 14};
                 ListVozideil.Add(voz);
                 parent.LinkaA.ListVozidiel.Add(voz);
             }
             for (int i = 0; i < sim._linkaATyp2; i++)
             {
-                var voz = new Vozidlo(3, 107, parent.LinkaA) {AktualnyPresun = 5};
+                var voz = new Vozidlo(3, 107, parent.LinkaA,"A") {AktualnyPresun = 14};
                 ListVozideil.Add(voz);
                 parent.LinkaA.ListVozidiel.Add(voz);
             }
+            for (int i = 0; i < sim._linkaAMicro; i++)
+            {
+                var voz = new Vozidlo(1, 8, parent.LinkaA, "M") { AktualnyPresun = 14 };
+                ListVozideil.Add(voz);
+                parent.LinkaA.ListVozidiel.Add(voz);
+            }
+
+
+
+
+
             for (int i = 0; i < sim._linkaBTyp1; i++)
             {
-                var voz = new Vozidlo(4, 186, parent.LinkaB) { AktualnyPresun = 0 };
+                var voz = new Vozidlo(4, 186, parent.LinkaB, "A") { AktualnyPresun = 12 };
                 ListVozideil.Add(voz);
                 parent.LinkaB.ListVozidiel.Add(voz);
             }
             for (int i = 0; i < sim._linkaBTyp2; i++)
             {
-                var voz = new Vozidlo(3, 107, parent.LinkaB) { AktualnyPresun = 5 };
+                var voz = new Vozidlo(3, 107, parent.LinkaB, "A") { AktualnyPresun = 12 };
                 ListVozideil.Add(voz);
                 parent.LinkaB.ListVozidiel.Add(voz);
             }
+            for (int i = 0; i < sim._linkaBMicro; i++)
+            {
+                var voz = new Vozidlo(1, 8, parent.LinkaB, "M") { AktualnyPresun = 12 };
+                ListVozideil.Add(voz);
+                parent.LinkaB.ListVozidiel.Add(voz);
+            }
+
+
+
+
             for (int i = 0; i < sim._linkaCTyp1; i++)
             {
-                var voz = new Vozidlo(4, 186, parent.LinkaC) { AktualnyPresun = 0 };
+                var voz = new Vozidlo(4, 186, parent.LinkaC, "A") { AktualnyPresun = 9 };
                 ListVozideil.Add(voz);
                 parent.LinkaC.ListVozidiel.Add(voz);
 
             }
             for (int i = 0; i < sim._linkaCTyp2; i++)
             {
-                var voz = new Vozidlo(3, 107, parent.LinkaC) { AktualnyPresun = 5 };
+                var voz = new Vozidlo(3, 107, parent.LinkaC, "A") { AktualnyPresun = 9 };
                 ListVozideil.Add(voz);
                 parent.LinkaC.ListVozidiel.Add(voz);
             }
+            for (int i = 0; i < sim._linkaCMicro; i++)
+            {
+                var voz = new Vozidlo(1, 8, parent.LinkaC, "M") { AktualnyPresun = 9 };
+                ListVozideil.Add(voz);
+                parent.LinkaC.ListVozidiel.Add(voz);
+            }
+
         }
 
         override public void PrepareReplication()
         {
             base.PrepareReplication();
-            //MyMessage ms = new MyMessage(MySim);
-            //ms.Addressee = FindAssistant(SimId.ProcesPresun); ;
-            //ms.Vozidlo = ((AgentPresunu)MySim.FindAgent(SimId.AgentPresunu)).ListVozideil.FirstOrDefault();
-            //MyManager.StartContinualAssistant(ms);
+            GenerujVozidla();
 
         }
 

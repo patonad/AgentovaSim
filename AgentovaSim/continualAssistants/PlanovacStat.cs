@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using agents;
+using continualAssistants;
 using OSPABA;
 using simulation;
 
@@ -39,11 +40,12 @@ namespace AgentovaSim.continualAssistants
             ms.Code = Mc.GeneujStat;
             ms.Addressee = this;
             ((MySimulation)MySim).SymCas = MySim.CurrentTime;
-            Thread.SpinWait(100000);
-            Hold(1, ms);
+            Thread.SpinWait(((MySimulation)MySim).Spomalenie);
             PreratajStat();
-
-
+            if (((MySimulation)MySim).GenerujeSa || ((MySimulation)MySim).PocetAut !=0)
+            {
+                Hold(1, ms);
+            }
         }
 
         private void PreratajStat()
@@ -53,6 +55,9 @@ namespace AgentovaSim.continualAssistants
             {
                 vozidlo.Prerataj(MySim.CurrentTime);
             }
+
+            var a = ((MySimulation) MySim).CasZapasu.TotalSeconds - 6786 + MySim.CurrentTime;
+            ((MySimulation)MySim).AktualCas = TimeSpan.FromSeconds(a);
         }
 
         //meta! userInfo="Generated code: do not modify", tag="begin"

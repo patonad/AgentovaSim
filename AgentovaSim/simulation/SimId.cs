@@ -18,6 +18,8 @@ namespace simulation
 	    public const int PlanovacStat = 1010;
         public const int ProcesNastupenie = 1004;
 	    public const int ProcesVystupenie = 1005;
+	    public const int ProcesCakania = 1006;
+	    public const int ProcesSpustiVozidla = 1007;
         public const int PlanovacPrichodov = 1001;
 		//meta! tag="end"
 	}

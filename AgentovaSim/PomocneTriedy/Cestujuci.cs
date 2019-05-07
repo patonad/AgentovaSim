@@ -9,5 +9,11 @@ namespace AgentovaSim.PomocneTriedy
     public class Cestujuci
     {
         public string Zastavka { get; set; }
+        public double ZaciatokCakania { get; set; }
+
+        public double DobaCakania(double aktualCas)
+        {
+            return aktualCas - ZaciatokCakania;
+        }
     }
 }
