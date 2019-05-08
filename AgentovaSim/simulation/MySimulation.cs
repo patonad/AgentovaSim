@@ -5,6 +5,7 @@ using agents;
 using AgentovaSim.simulation;
 using managers;
 using Microsoft.Win32;
+using OSPStat;
 using PropertyChanged;
 
 namespace simulation
@@ -75,7 +76,26 @@ namespace simulation
 	    public bool GenerujeSa { get; set; } = true;
 	    public  int PocetAut { get; set; }
         private int _pocet = 1;
-		public MySimulation(int LinkaATyp1, int LinkaATyp2, int linkaAMicr , int LinkaBTyp1, int LinkaBTyp2, int linkaBMicr, int LinkaCTyp1, int LinkaCTyp2, int linkaCMicr)
+
+
+	    public Stat PocetPrichodovStat { get; set; } = new Stat();
+	    public double PocetPrichodovStatL { get; set; }
+	    public double PocetPrichodovStatP { get; set; }
+
+	    public Stat PocetPrichodovPoZacStat { get; set; } = new Stat();
+	    public double PocetPrichodovPoZacStatL { get; set; }
+	    public double PocetPrichodovPoZacStatP { get; set; }
+
+
+	    public Stat DobaCakaniaStat { get; set; } = new Stat();
+	    public double DobaCakaniaStatL { get; set; }
+	    public double DobaCakaniaStatP { get; set; }
+
+	    public Stat ZarobokStat { get; set; } = new Stat();
+	    public double ZarobokStatL { get; set; }
+	    public double ZarobokStatP { get; set; }
+
+        public MySimulation(int LinkaATyp1, int LinkaATyp2, int linkaAMicr , int LinkaBTyp1, int LinkaBTyp2, int linkaBMicr, int LinkaCTyp1, int LinkaCTyp2, int linkaCMicr)
 		{
 		    var typ1 = 0;
 		    var typ2 = 0;
@@ -131,30 +151,34 @@ namespace simulation
 		    AktualRepl = (CurrentReplication + 1);
             PocetCelkovo += ((ManagerModelu)AgentModelu.MyManager).Cislo;
 		    PocetPoRepl = PocetCelkovo / (double)AktualRepl;
+            
+            PocetPrichodovStat.AddSample(((ManagerModelu)AgentModelu.MyManager).Cislo);
+		   
 
-            //vozidlo.Linka.Nastupeny++;
-            //vozidlo.Linka.SucetCasCakana += MySim.CurrentTime - ces.ZaciatokCakania;
-            //var b = vozidlo.Linka.SucetCasCakana / vozidlo.Linka.Nastupeny;
-            //b = Double.IsNaN(b) ? 0 : b;
-            //vozidlo.Linka.PrCasCakana = b;
             var cas = SucetCasCakana / Nastupeny;
 		    PrCasCakanaSucet += cas; 
-		    PrCasCakanaPoRepl = PrCasCakanaSucet / AktualRepl;
+		    PrCasCakanaPoRepl = (PrCasCakanaSucet / AktualRepl)/60;
+            //
+		    
 
-		    PrCasCakanaPoReplASuc += AgentVozidiel.LinkaA.SucetCasCakana /
+            PrCasCakanaPoReplASuc += AgentVozidiel.LinkaA.SucetCasCakana /
 		                         AgentVozidiel.LinkaA.Nastupeny;
-		    PrCasCakanaPoReplBSuc += AgentVozidiel.LinkaB.SucetCasCakana /
+		    DobaCakaniaStat.AddSample(cas/60);
+
+            PrCasCakanaPoReplBSuc += AgentVozidiel.LinkaB.SucetCasCakana /
 		                         AgentVozidiel.LinkaB.Nastupeny;
 		    PrCasCakanaPoReplCSuc += AgentVozidiel.LinkaC.SucetCasCakana /
 		                         AgentVozidiel.LinkaC.Nastupeny;
-		    PrCasCakanaPoReplA = PrCasCakanaPoReplASuc/ (double)AktualRepl;
-		    PrCasCakanaPoReplB = PrCasCakanaPoReplBSuc / (double)AktualRepl;
-		    PrCasCakanaPoReplC = PrCasCakanaPoReplCSuc / (double)AktualRepl;
+		    PrCasCakanaPoReplA = (PrCasCakanaPoReplASuc/ (double)AktualRepl)/60;
+		    PrCasCakanaPoReplB = (PrCasCakanaPoReplBSuc / (double)AktualRepl)/60;
+		    PrCasCakanaPoReplC = (PrCasCakanaPoReplCSuc / (double)AktualRepl)/60;
 
             PoZaciatkuSucet += PoZaciatku / (double)Nastupeny *100;
 		    PoZaciatkuPoRepl = PoZaciatkuSucet / AktualRepl;
+		    PocetPrichodovPoZacStat.AddSample(PoZaciatku / (double)Nastupeny * 100);
 
-		    ZarobokCelko += Zarobok;
+		    ZarobokStat.AddSample(Zarobok);
+            ZarobokCelko += Zarobok;
 		    ZarobokPoRepl = (double)ZarobokCelko / AktualRepl;
 
 		    PoZaciatkuSucetA += (AgentVozidiel.LinkaA.PoZaciatku / (double)AgentVozidiel.LinkaA.Nastupeny) * 100;
@@ -165,6 +189,24 @@ namespace simulation
 
 		    PoZaciatkuSucetC += (AgentVozidiel.LinkaC.PoZaciatku / (double)AgentVozidiel.LinkaC.Nastupeny) * 100;
 		    PoZaciatkuCPoRepl = PoZaciatkuSucetC / AktualRepl;
+
+
+		    if (CurrentReplication > 10)
+		    {
+		        PocetPrichodovStatL = PocetPrichodovStat.ConfidenceInterval90[0];
+		        PocetPrichodovStatP = PocetPrichodovStat.ConfidenceInterval90[1];
+
+		        PocetPrichodovPoZacStatL = PocetPrichodovPoZacStat.ConfidenceInterval90[0];
+		        PocetPrichodovPoZacStatP = PocetPrichodovPoZacStat.ConfidenceInterval90[1];
+
+		        DobaCakaniaStatL = DobaCakaniaStat.ConfidenceInterval90[0];
+		        DobaCakaniaStatP = DobaCakaniaStat.ConfidenceInterval90[1];
+
+		        ZarobokStatL = ZarobokStat.ConfidenceInterval90[0];
+		        ZarobokStatP = ZarobokStat.ConfidenceInterval90[1];
+
+
+            }
 
         }
 

@@ -134,7 +134,7 @@
 
 
         <Grid  Visibility="Visible" Name="GridRep" Margin="145,0,-0.2,0">
-            <Label Content="{Binding MySimulation.PocetPoRepl}"  HorizontalAlignment="Left" Margin="208,349,0,0" VerticalAlignment="Top" Width="75" Height="35"/>
+            <Label Content="{Binding MySimulation.PocetPoRepl}"  HorizontalAlignment="Left" Margin="290,349,0,0" VerticalAlignment="Top" Width="75" Height="35"/>
             <Button FontSize="25" Content="Start" HorizontalAlignment="Left" Margin="65,46,0,0" VerticalAlignment="Top" Width="110" Click="Button_Click" RenderTransformOrigin="0.139,-2.615" Height="39"/>
           
             <Label  FontSize="20" Content="Linka A" HorizontalAlignment="Left" Margin="60,195,0,0" VerticalAlignment="Top"/>
@@ -161,21 +161,21 @@
             <TextBox x:Name="TextBoxCMR" HorizontalAlignment="Left" Height="23" Margin="434,301,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="40" RenderTransformOrigin="-13.89,3.817"/>
             <Label Content="Pocet cestujucich" HorizontalAlignment="Left" Margin="52,354,0,0" VerticalAlignment="Top" Width="110"/>
             <Label Content="Priemerna doba cakania A" HorizontalAlignment="Left" Margin="49,426,0,0" VerticalAlignment="Top" Width="155"/>
-            <Label Content="{Binding MySimulation.PrCasCakanaPoReplB}"  HorizontalAlignment="Left" Margin="210,458,0,0" VerticalAlignment="Top" Width="75" Height="35" RenderTransformOrigin="-6.752,-3.16"/>
+            <Label Content="{Binding MySimulation.PrCasCakanaPoReplB}"  HorizontalAlignment="Left" Margin="288,458,0,0" VerticalAlignment="Top" Width="75" Height="35" RenderTransformOrigin="-6.752,-3.16"/>
             <Label Content="Priemerna doba cakania B" HorizontalAlignment="Left" Margin="50,459,0,0" VerticalAlignment="Top" Width="155"/>
             <Label Content="Priemerna doba cakania C" HorizontalAlignment="Left" Margin="48,495,0,0" VerticalAlignment="Top" Width="155"/>
-            <Label Content="{Binding MySimulation.PrCasCakanaPoReplA}"  HorizontalAlignment="Left" Margin="210,423,0,0" VerticalAlignment="Top" Width="75" Height="35"/>
-            <Label Content="{Binding MySimulation.PrCasCakanaPoReplC}"  HorizontalAlignment="Left" Margin="210,493,0,0" VerticalAlignment="Top" Width="75" Height="35" RenderTransformOrigin="0.515,0.594"/>
+            <Label Content="{Binding MySimulation.PrCasCakanaPoReplA}"  HorizontalAlignment="Left" Margin="289,423,0,0" VerticalAlignment="Top" Width="75" Height="35"/>
+            <Label Content="{Binding MySimulation.PrCasCakanaPoReplC}"  HorizontalAlignment="Left" Margin="287,493,0,0" VerticalAlignment="Top" Width="75" Height="35" RenderTransformOrigin="0.515,0.594"/>
             <Label Content="Prichod po zaciatku A" HorizontalAlignment="Left" Margin="50,567,0,0" VerticalAlignment="Top" Width="155"/>
             <Label Content="Prichod po zaciatku B" HorizontalAlignment="Left" Margin="50,602,0,0" VerticalAlignment="Top" Width="155"/>
             <Label Content="Prichod po zaciatku C" HorizontalAlignment="Left" Margin="49,639,0,0" VerticalAlignment="Top" Width="155" RenderTransformOrigin="-3.385,-7.992"/>
-            <Label Content="{Binding MySimulation.PoZaciatkuAPoRepl}"  HorizontalAlignment="Left" Margin="209,566,0,0" VerticalAlignment="Top" Width="75" Height="35"/>
-            <Label Content="{Binding MySimulation.PoZaciatkuBPoRepl}"  HorizontalAlignment="Left" Margin="209,601,0,0" VerticalAlignment="Top" Width="75" Height="35" RenderTransformOrigin="-7.819,-4.897"/>
-            <Label Content="{Binding MySimulation.PoZaciatkuCPoRepl}"  HorizontalAlignment="Left" Margin="208,637,0,0" VerticalAlignment="Top" Width="75" Height="35"/>
+            <Label Content="{Binding MySimulation.PoZaciatkuAPoRepl}"  HorizontalAlignment="Left" Margin="289,566,0,0" VerticalAlignment="Top" Width="75" Height="35"/>
+            <Label Content="{Binding MySimulation.PoZaciatkuBPoRepl}"  HorizontalAlignment="Left" Margin="288,601,0,0" VerticalAlignment="Top" Width="75" Height="35" RenderTransformOrigin="-7.819,-4.897"/>
+            <Label Content="{Binding MySimulation.PoZaciatkuCPoRepl}"  HorizontalAlignment="Left" Margin="287,637,0,0" VerticalAlignment="Top" Width="75" Height="35"/>
             <Label Content="Prichod po celkovy" HorizontalAlignment="Left" Margin="50,531,0,0" VerticalAlignment="Top" Width="155"/>
-            <Label Content="{Binding MySimulation.PoZaciatkuPoRepl}"  HorizontalAlignment="Left" Margin="210,530,0,0" VerticalAlignment="Top" Width="75" Height="35" RenderTransformOrigin="0.515,0.446"/>
+            <Label Content="{Binding MySimulation.PocetPrichodovPoZacStatL}"  HorizontalAlignment="Left" Margin="210,530,0,0" VerticalAlignment="Top" Width="75" Height="35" RenderTransformOrigin="0.515,0.446"/>
             <Label Content="Priemerna doba cakania" HorizontalAlignment="Left" Margin="50,388,0,0" VerticalAlignment="Top" Width="155"/>
-            <Label Content="{Binding MySimulation.PrCasCakanaPoRepl}"  HorizontalAlignment="Left" Margin="209,385,0,0" VerticalAlignment="Top" Width="75" Height="35"/>
+            <Label Content="{Binding MySimulation.DobaCakaniaStatL}"  HorizontalAlignment="Left" Margin="209,385,0,0" VerticalAlignment="Top" Width="75" Height="35"/>
             <Button FontSize="25" Content="Stop" HorizontalAlignment="Left" Margin="195,45,0,0" VerticalAlignment="Top" Width="110" Click="BtnSimStop_Click" RenderTransformOrigin="0.139,-2.615" Height="39"/>
             <Label Content="Typ 1" HorizontalAlignment="Left" Margin="175,251,0,0" VerticalAlignment="Top"/>
             <Label Content="Typ 2" HorizontalAlignment="Left" Margin="267,251,0,0" VerticalAlignment="Top"/>
@@ -183,12 +183,20 @@
             <Label Content="Typ 2" HorizontalAlignment="Left" Margin="267,297,0,0" VerticalAlignment="Top"/>
             <Label x:Name="Label2R"  Content="Mikrobus" HorizontalAlignment="Left" Margin="368,299,0,0" VerticalAlignment="Top"/>
             <Label  FontSize="20" Content="Pocet  replikacii" HorizontalAlignment="Left" Margin="60,94,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="TextBoxPocetRepl" HorizontalAlignment="Left" Height="23" Margin="230,105,0,0" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Width="85"/>
+            <TextBox x:Name="TextBoxPocetRepl" HorizontalAlignment="Left" Height="23" Margin="230,105,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="85"/>
             <Label Content="Naklady na autobusy" HorizontalAlignment="Left" Margin="50,674,0,0" VerticalAlignment="Top" Width="125"/>
-            <Label Content="{Binding MySimulation.Naklady}"  HorizontalAlignment="Left" Margin="207,671,0,0" VerticalAlignment="Top" Width="75" Height="35"/>
+            <Label Content="{Binding MySimulation.Naklady}"  HorizontalAlignment="Left" Margin="288,671,0,0" VerticalAlignment="Top" Width="75" Height="35"/>
             <Label Content="Mikrobusy zarobili" HorizontalAlignment="Left" Margin="47,711,0,0" VerticalAlignment="Top" Width="110"/>
-            <Label Content="{Binding MySimulation.ZarobokPoRepl}"  HorizontalAlignment="Left" Margin="206,709,0,0" VerticalAlignment="Top" Width="75" Height="35"/>
+            <Label Content="{Binding MySimulation.ZarobokStatL}"  HorizontalAlignment="Left" Margin="206,709,0,0" VerticalAlignment="Top" Width="75" Height="35"/>
             <Label Content="{Binding MySimulation.AktualRepl}"  HorizontalAlignment="Left" Margin="225,135,0,0" VerticalAlignment="Top" Width="95" Height="35"/>
+            <Label Content="{Binding MySimulation.PocetPrichodovStatL}"  HorizontalAlignment="Left" Margin="211,349,0,0" VerticalAlignment="Top" Width="75" Height="35"/>
+            <Label Content="{Binding MySimulation.PocetPrichodovStatP}"  HorizontalAlignment="Left" Margin="375,349,0,0" VerticalAlignment="Top" Width="75" Height="35"/>
+            <Label Content="{Binding MySimulation.PoZaciatkuPoRepl}"  HorizontalAlignment="Left" Margin="290,530,0,0" VerticalAlignment="Top" Width="75" Height="35" RenderTransformOrigin="0.515,0.446"/>
+            <Label Content="{Binding MySimulation.PocetPrichodovPoZacStatP}"  HorizontalAlignment="Left" Margin="373,530,0,0" VerticalAlignment="Top" Width="75" Height="35" RenderTransformOrigin="0.515,0.446"/>
+            <Label Content="{Binding MySimulation.PrCasCakanaPoRepl}"  HorizontalAlignment="Left" Margin="290,385,0,0" VerticalAlignment="Top" Width="75" Height="35"/>
+            <Label Content="{Binding MySimulation.DobaCakaniaStatP}"  HorizontalAlignment="Left" Margin="375,385,0,0" VerticalAlignment="Top" Width="75" Height="35"/>
+            <Label Content="{Binding MySimulation.ZarobokPoRepl}"  HorizontalAlignment="Left" Margin="288,709,0,0" VerticalAlignment="Top" Width="75" Height="35"/>
+            <Label Content="{Binding MySimulation.ZarobokStatP}"  HorizontalAlignment="Left" Margin="371,709,0,0" VerticalAlignment="Top" Width="75" Height="35"/>
         </Grid>
         <Button x:Name="BtnSimulacia" Content="Simulácia" Margin="20,59,1314,0" VerticalAlignment="Top" Height="46" FontSize="18" Click="BtnSimulacia_Click"/>
         <Button x:Name="BtnReplikacia" Content="Replikacie" Margin="19,119,1314,0" VerticalAlignment="Top" Height="46" FontSize="18" Click="BtnReplikacia_Click"/>

@@ -27,10 +27,12 @@ namespace agents
 
         private void PustiVozidla(List<Vozidlo> voz1, List<Vozidlo> voz2, List<Vozidlo> vozM)
         {
-            var count = voz1.Count + voz2.Count + vozM.Count;
+            var count = voz1.Count + voz2.Count;
             if (count == 0)
                 return;
-            var cas = 1800 / (count);
+
+              var cas = 1800 / (count);
+            //var cas =240;
             int a = 0;
             while (voz1.Count != 0 || voz2.Count != 0 || vozM.Count != 0)
             {
@@ -44,7 +46,6 @@ namespace agents
                     ms.Oneskorenie = cas * a;
                     MyManager.StartContinualAssistant(ms);
                     a++;
-
                 }
                 if (voz2.Count != 0)
                 {
@@ -66,8 +67,9 @@ namespace agents
                     ms.Addressee = FindAssistant(SimId.ProcesSpustiVozidla);
                     ms.Oneskorenie = cas * a;
                     MyManager.StartContinualAssistant(ms);
-                    a++;
                 }
+                a++;
+                
             }
         }
 

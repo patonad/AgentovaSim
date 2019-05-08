@@ -20,9 +20,9 @@ namespace AgentovaSim.PomocneTriedy
         {
             Nazov = nazov;
             PocetCestujucich = 0;
-            //for (int i = 0; i < 1; i++)
+            //for (int i = 0; i < 10; i++)
             //{
-            //    Enqueue(new Cestujuci());
+            //    Enqueue(new Cestujuci(){ZaciatokCakania = 0});
             //}
         }
 

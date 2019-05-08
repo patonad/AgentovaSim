@@ -49,6 +49,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -89,6 +91,7 @@
     <Compile Include="continualAssistants\ProcesVystup.cs" />
     <Compile Include="managers\ManagerZasrtavok.cs" />
     <Compile Include="PomocneTriedy\Cestujuci.cs" />
+    <Compile Include="PomocneTriedy\IntervalSpolahlivosti.cs" />
     <Compile Include="PomocneTriedy\Linka.cs" />
     <Compile Include="PomocneTriedy\Presun.cs" />
     <Compile Include="PomocneTriedy\Vozidlo.cs" />
@@ -152,6 +155,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="instantAssistants\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
